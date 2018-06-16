@@ -142,9 +142,12 @@ def load_ingredients():
         reader = csv.reader(f)
         for row in reader:
             if len(row) == 2:
-                path = os.path.join('img', row[1])
+                path = os.path.join('..', 'img', row[1])
                 img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+                print(os.getcwd(), file=sys.stdout)
                 ingredients_list.append(recipi.Ingredient(name=row[0], img=img))
+
+    print([i.image for i in ingredients_list], file=sys.stdout)
 
 
 cooking_methods_list = []

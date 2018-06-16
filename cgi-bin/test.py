@@ -1,12 +1,17 @@
-﻿# -*- coding: utf-8 -*-
+﻿#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 
 import cgi
 from jinja2 import Environment, FileSystemLoader
 import cookbad_stub
 import recipi
+from flask import Flask, render_template, request, redirect, url_for
 
+app = Flask(__name__)
+app._static_folder = './static'
 
+@app.route('/')
 def main():
     # テンプレートファイルを指定
     env = Environment(loader=FileSystemLoader('./', encoding='shift-jis'))
@@ -30,11 +35,13 @@ def main():
 
     # html = tpl.render({'title':'aaaaa', 'materials':materials_list, 'after':after_list, 'recipi':steps_list})
     html = tpl.render({'title':'aaaaa', 'materials':materials_list, 'recipi':steps_list})
+    # return render_template('./template.html', title='aaaaa', materials=materials_list, recipi=steps_list)
 
     #print('Content-type: text/html; charset=UTF-8\r\n')
-    print('Content-type: text/html; charset=Shift-JIS\r\n')
-    print(html)
+    # print('Content-type: text/html; charset=Shift-JIS\r\n')
+    return html
 
 
 if __name__ == '__main__':
-    main()
+    app.debug = True # デバッグモード有効化
+    app.run(host='0.0.0.0') # どこからでもアクセス可能に

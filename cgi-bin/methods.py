@@ -16,6 +16,12 @@ import cv2
 import numpy as np
 import recipi
 
+from flask import Flask
+import sys
+
+app = Flask(__name__)
+
+
 
 #========================================================================#
 #--- 以下，「[food]を[minute]分焼く」という調理に対応する処理のモック ---#

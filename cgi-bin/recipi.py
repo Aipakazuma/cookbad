@@ -9,6 +9,9 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 
+import sys
+
+
 class Recipi:
     """レシピ
     レシピ全体を表すクラス。
@@ -46,6 +49,7 @@ class CookingMethod:
     def __call__(self, rcp):
         namelist = [item.name for item in self.ps]
         self.describe = self.describe.format(*namelist)
+        print(self.ps, file=sys.stdout)
         return self.cookfunc(self, rcp, *self.ps)
 
 
